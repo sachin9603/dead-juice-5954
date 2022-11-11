@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+E:\vs code\Smart Tender Manager\.metadata\.plugins\org.eclipse.jdt.core
+40201870.index
+1112575695.index
+1865797976.index
+3747779379.index
