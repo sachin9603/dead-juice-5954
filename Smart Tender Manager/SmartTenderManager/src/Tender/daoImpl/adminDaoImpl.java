@@ -12,6 +12,8 @@ import com.mysql.cj.xdevapi.Result;
 
 import Tender.Exception.AdminException;
 import Tender.Exception.VenderException;
+import Tender.Model.Admin;
+import Tender.Model.Bid;
 import Tender.Model.Tender;
 import Tender.Model.Vender;
 import Tender.dao.adminDao;
@@ -19,17 +21,7 @@ import Tender.utility.Dao;
 
 public class adminDaoImpl implements adminDao{
 
-	@Override
-	public String loginIntoAdmin(String AUsername, String APassword) throws AdminException{
-		
-		// Admin is hardcoded  if correct username and password is present then message is login
-		String message = "Not Login";
-		
-		if(AUsername == "sachin" && APassword == "sachin7410") {
-			message = "Login";
-		}
-		return message ;
-	}
+	
 
 	@Override
 	public String registerVender(Vender vender) throws AdminException{
@@ -179,14 +171,118 @@ public class adminDaoImpl implements adminDao{
 		
 				
 			}
-			
+	
 			
 			
 			return Tenders;
 		
 	
-	} 
+	}
+
+	@Override
+	public List<Bid> getAllBidOfAVender(int VenderId) {
+		 List<Bid> bids = new ArrayList<>();
+			
+		 
+		   
+			try(Connection conn = Dao.provideConnection()){
+				
+				PreparedStatement ps = conn.prepareStatement("select * from bid where VenderId = ?" );
+				ps.setInt(1, VenderId);
+				
+				ResultSet rs = ps.executeQuery();
+				
+				while(rs.next()) {
+					int B = rs.getInt("BidId");
+					
+					 int v= rs.getInt("VenderId");
+					int f = rs.getInt("FixedPrice");
+					Boolean  s = rs.getBoolean("status");
+					
+					Bid bid = new Bid ();
+					bid.setBidID(B);
+					bid.setVenderId(v);
+					bid.setFixedPrice(f);
+					bid.setStatus(s);
+					
+					bids.add(bid);
+			
+			} 
 
 
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 
+				
+			}
+			
+				return bids;
+
+	}
+
+	@Override
+	public String AssignTenderToAVendor(int TenderId, int VID) {
+		// TODO Auto-generated method stub
+		String message = "not assigned ";
+		
+		
+			try(Connection conn = Dao.provideConnection()){
+				
+				PreparedStatement ps = conn.prepareStatement("insert into tendertovender values (? ,?)" );
+				ps.setInt(1, TenderId);
+				ps.setInt(2, VID);
+		
+		int x = ps.executeUpdate();
+		if ( x>0) {
+			message = "tender assign to vender successfully ";
+		}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+
+				
+			}
+			
+				
+		
+		
+		
+		
+		
+		return message;
+	}
+
+	@Override
+	public Admin loginIntoAdmin(String AUsername, String APassword) throws AdminException {
+		Admin  ass = null;
+		 
+		try(Connection conn = Dao.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("select * from admin where AUsername = ? AND APassword = ?");
+			
+				ps.setString(1,AUsername );
+				ps.setString(2,APassword);
+				ResultSet rs = ps.executeQuery();
+				
+				if (rs.next()) {
+					int r = rs.getInt("AID");
+					String n = rs.getString("AName");
+					String a = rs.getString("AUsername");
+					String p = rs.getString("APassword");
+					
+					 ass = new Admin (r,n,a,p);		
+				}
+				
+		}catch(SQLException e) {
+			//printStackTrace(e);
+			throw new AdminException("invalid username and password");
+		}
+		
+		
+		
+		
+		return ass;
+	}
 }

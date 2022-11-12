@@ -5,7 +5,7 @@ import java.util.Scanner;
 import Tender.Exception.AdminException;
 import Tender.Model.Vender;
 import Tender.dao.adminDao;
-import Tender.dao.adminDaoImpl;
+import Tender.daoImpl.adminDaoImpl;
 
 public class registerVenderByAdmin {
 
