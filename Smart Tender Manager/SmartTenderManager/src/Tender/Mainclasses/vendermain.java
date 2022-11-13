@@ -43,9 +43,10 @@ public class vendermain {
 					
 					while(true){
 						System.out.println("Enter Your Choice");
+						System.out.println("-----------------------------");
 						System.out.println("  2 View all the current Tenders.");
 						System.out.println("  3 Place a Bid against a Tender.");
-						System.out.println("  4 View status of a Bid(Whether Selected or Not)");
+						System.out.println("  4 View status of a Bid(Whether Selected or Not)"); 
 						System.out.println("  5 View his own Bid History.");
 					
 						
@@ -82,9 +83,9 @@ public class vendermain {
 						
 
 					case 4:
-						System.out.println("Enter your venderID");
+						System.out.println("Status  of  your  aLL bid ");
 
-					    int venderId = sc.nextInt();
+					    int venderId =ans.getVid();
 					    
 					   
 					 //   adminDao Dao = new adminDaoImpl() ;

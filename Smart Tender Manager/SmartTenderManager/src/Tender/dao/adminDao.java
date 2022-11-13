@@ -9,7 +9,7 @@ import Tender.Model.Bid;
 import Tender.Model.Tender;
 import Tender.Model.Vender;
 
-public interface adminDao {
+public interface adminDao{
 	
 
   public Admin loginIntoAdmin(String AUsername ,String APassword) throws AdminException;

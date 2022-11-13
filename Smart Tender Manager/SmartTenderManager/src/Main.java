@@ -8,31 +8,55 @@ public class Main {
 	
 	public static adminmain adminobj = new adminmain();
 	public static vendermain venderobj = new vendermain();
+	
+	
+	public static  void Entry() {
+		
+	//	String k=null;
+		System.out.println("WELCOME TO SMART TENDER MANAGER ");
+		System.out.println("--------------------------------------");
+		System.out.println("enter your choice ");
+		System.out.println("----> 1 If you are admin ");
+
+		System.out.println("----> 2 If you are vender ");
+
+		System.out.println("----> 3 for exit ");
+		
+		Scanner sc = new Scanner(System.in);
+		
+		int a = sc.nextInt();
+		//k =sc.next();
+		
+		
+
+		if(a==1){
+			
+			adminobj.Admintask();
+			//break;
+			
+		}else if(a==2) {
+			
+		venderobj.Vendertask();
+		//break;
+		}else if(a != 1 ||a != 2 ) {
+			System.out.println("Invalid Entry");
+			Entry() ;
+		//	break;
+		return;
+		};
+//		else if (k != null) {
+//			System.out.println("Kindly choose appropiate option");
+//		};
+	//}
+		
+	}
+	
+	
 public static void main(String[] args) {
 	
-	System.out.println("enter your choice ");
-	System.out.println("1 for admin ");
-
-	System.out.println("2 for vender ");
-
-	System.out.println("3 for exit ");
 	
-	Scanner sc = new Scanner(System.in);
-	
-	int a = sc.nextInt();
-	
-
-	if(a==1){
-		
-		adminobj.Admintask();
-	}else if(a==2) {
-		
-	venderobj.Vendertask();
-	}else if(a==3) {
-		System.out.println("Thank you have been exit the program");
-	return;
-	};
-
+	//while(true) {
+	Entry();
 	
 }
 }

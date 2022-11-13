@@ -143,17 +143,17 @@ public class VenderDaoimpl implements venderDao {
 	public Map<Integer, Boolean> bidStatus(int VenderId) {
 		  Map<Integer, Boolean > hm
           = new HashMap<Integer, Boolean>();
-	  hm = null ;
+	 
 		  
 		  try(Connection conn = Dao.provideConnection()){
 				
-				PreparedStatement ps = conn.prepareStatement("select BId, Status from bid where VenderId =?" );
+				PreparedStatement ps = conn.prepareStatement("select BidId, Status from bid where VenderId =?" );
 				ps.setInt(1, VenderId);
 				
 				ResultSet rs = ps.executeQuery();
 				
 				while(rs.next()) {
-					int BId = rs.getInt("BId");
+					int BId = rs.getInt("BidId");
 				Boolean Status = rs.getBoolean("Status");
 					
 					
